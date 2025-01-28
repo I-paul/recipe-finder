@@ -1,123 +1,146 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import './App.css'
+import './App.css';
 
-function App() {
-    const images = [
-        { 
-            src: "/api/placeholder/1200/600", 
-            alt: "Slide 1",
-            title: "Delicious Recipes",
-            subtitle: "Discover your next favorite meal"
-        },
-        { 
-            src: "/api/placeholder/1200/600", 
-            alt: "Slide 2",
-            title: "Quick & Easy",
-            subtitle: "30-minute meals for busy days"
-        },
-        { 
-            src: "/api/placeholder/1200/600", 
-            alt: "Slide 3",
-            title: "Healthy Choices",
-            subtitle: "Nutritious and delicious options"
-        },
-    ];
-    
-    const [currentIndex, setCurrentIndex] = useState(0);
-    
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentIndex((prevIndex) => 
-                prevIndex === images.length - 1 ? 0 : prevIndex + 1
-            );
-        }, 5000);
-        
-        return () => clearInterval(timer);
-    }, [images.length]);
-    
-    const goToPrevious = () => {
-        setCurrentIndex((prevIndex) => 
-            prevIndex === 0 ? images.length - 1 : prevIndex - 1
-        );
-    };
-    
-    const goToNext = () => {
-        setCurrentIndex((prevIndex) => 
-            prevIndex === images.length - 1 ? 0 : prevIndex + 1
-        );
-    };
+const App = () => {
+  const images = [
+    {
+      src: "../src/assets/slide1.jpg",
+      alt: "Delicious Recipes",
+      title: "Delicious Recipes",
+      subtitle: "Discover your next favorite meal"
+    },
+    {
+      src: "../src/assets/slide4.jpg",
+      alt: "Quick & Easy",
+      title: "Quick & Easy",
+      subtitle: "30-minute meals for busy days"
+    },
+    {
+      src: "../src/assets/slide3.jpg",
+      alt: "Healthy Choices",
+      title: "Healthy Choices",
+      subtitle: "Nutritious and delicious options"
+    },
+    {
+      src: "../src/assets/slide2.jpg",
+      alt: "Seasonal Specials",
+      title: "Seasonal Specials",
+      subtitle: "Fresh and seasonal ingredients"
+    },
+  ];
 
-    return (
-        <>
-            <nav className="navbar">
-                <div className="logo">
-                    <p className="underline-animation">Recipe Finder</p>
-                </div>
-                <div className="nav-links">
-                    <a href="#home">Home</a>
-                    <a href="#recipes">Recipes</a>
-                    <a href="#categories">Categories</a>
-                    <a href="#about">About</a>
-                </div>
-            </nav>
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-            <div className="relative w-full h-[600px] overflow-hidden">
-                {/* Images with Overlay Text */}
-                <div 
-                    className="flex transition-transform duration-500 ease-in-out h-full"
-                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                >
-                    {images.map((image, index) => (
-                        <div 
-                            key={index}
-                            className="min-w-full h-full flex-shrink-0 relative"
-                        >
-                            <img
-                                src={image.src}
-                                alt={image.alt}
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-white">
-                                <h2 className="text-4xl font-bold mb-4">{image.title}</h2>
-                                <p className="text-xl">{image.subtitle}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+  const getSlideIndex = (index) => {
+    if (index < 0) return images.length - 1;
+    if (index >= images.length) return 0;
+    return index;
+  };
 
-                {/* Navigation Buttons */}
-                <button
-                    onClick={goToPrevious}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-colors"
-                    aria-label="Previous slide"
-                >
-                    <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                    onClick={goToNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-colors"
-                    aria-label="Next slide"
-                >
-                    <ChevronRight className="w-6 h-6" />
-                </button>
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!isAnimating) {
+        goToNext();
+      }
+    }, 5000);
 
-                {/* Dots Navigation */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                    {images.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setCurrentIndex(index)}
-                            className={`w-3 h-3 rounded-full transition-colors ${
-                                currentIndex === index ? 'bg-white' : 'bg-white/50'
-                            }`}
-                            aria-label={`Go to slide ${index + 1}`}
-                        />
-                    ))}
-                </div>
+    return () => clearInterval(timer);
+  }, [isAnimating]);
+
+  const goToPrevious = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prevIndex) => getSlideIndex(prevIndex - 1));
+      setTimeout(() => setIsAnimating(false), 500);
+    }
+  };
+
+  const goToNext = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prevIndex) => getSlideIndex(prevIndex + 1));
+      setTimeout(() => setIsAnimating(false), 500);
+    }
+  };
+
+  const goToSlide = (index) => {
+    if (!isAnimating && index !== currentIndex) {
+      setIsAnimating(true);
+      setCurrentIndex(index);
+      setTimeout(() => setIsAnimating(false), 500);
+    }
+  };
+
+  return (
+    <div className="app-container">
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className="navbar-content">
+            <div className="logo">
+              Recipe Finder
             </div>
-        </>
-    )
-}
+            <div className="nav-links">
+              <a href="#home">Home</a>
+              <a href="#recipes">Recipes</a>
+              <a href="#categories">Categories</a>
+              <a href="#about">About</a>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-export default App
+      <div className="slider-wrapper">
+        <div className="slider-container">
+          <div className="slider-track">
+            {[-1, 0, 1].map((offset) => {
+              const slideIndex = getSlideIndex(currentIndex + offset);
+              const image = images[slideIndex];
+              return (
+                <div
+                  key={slideIndex}
+                  className={`slide ${offset === 0 ? 'active' : ''} ${
+                    offset === -1 ? 'prev' : offset === 1 ? 'next' : ''
+                  }`}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                  />
+                  {offset === 0 && (
+                    <div className="slide-overlay">
+                      <div className="slide-content">
+                        <h2>{image.title}</h2>
+                        <p>{image.subtitle}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <button className="nav-button prev-button" onClick={goToPrevious}>
+            <ChevronLeft size={24} />
+          </button>
+          <button className="nav-button next-button" onClick={goToNext}>
+            <ChevronRight size={24} />
+          </button>
+
+          <div className="slider-dots">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`dot ${index === currentIndex ? 'active' : ''}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
