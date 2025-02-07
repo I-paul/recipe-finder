@@ -1,13 +1,28 @@
 /* Base styles */
-.app-container {
+:root {
+  --oak-brown: #8B4513;        /* Rich oak wood tone */
+  --burnt-orange: #D35400;     /* Deep orange */
+  --light-orange: #FFB347;     /* Softer orange */
+  --copper: #B87333;           /* Metallic cooking tone */
+  --cream: #FFF8DC;            /* Warm light tone */
+  --dark-wood: #5C4033;        /* Deep brown */
+  --spice-red: #C0392B;        /* Warm red accent */
+}
+
+body{
   min-height: 100vh;
-  background-color: #f9fafb;
+  background-color: var(--cream);
 }
 
 /* Navbar styles */
 .navbar {
-  background-color: white;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  margin-top: 5px;
+  background-color: var(--oak-brown);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
 }
 
 .navbar-container {
@@ -26,12 +41,14 @@
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #4f46e5;
-  transition: color 0.3s ease;
+  color: var(--cream);
+  transition: 0.5s ease-in;
 }
 
 .logo:hover {
-  color: #4338ca;
+  cursor: pointer;
+  color: var(--light-orange);
+  letter-spacing: 0.1rem;
 }
 
 .nav-links {
@@ -40,18 +57,19 @@
 }
 
 .nav-links a {
-  color: #4b5563;
+  color: var(--cream);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #4f46e5;
+  color: var(--light-orange);
 }
 
 /* Slider styles */
 .slider-wrapper {
   margin: 3rem auto;
+  margin-top: 12vh;
   padding: 0 1rem;
 }
 
@@ -104,7 +122,7 @@
 .slide-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  background: linear-gradient(to top, rgba(92, 64, 51, 0.6), transparent);
   border-radius: 0.75rem;
 }
 
@@ -113,7 +131,7 @@
   bottom: 0;
   left: 0;
   padding: 2.5rem;
-  color: white;
+  color: var(--cream);
 }
 
 .slide-content h2 {
@@ -131,8 +149,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: transparent;
-  color: #1f2937;
+  background: var(--dark-wood);
+  color: var(--cream);
   padding: 1rem;
   border-radius: 9999px;
   border: none;
@@ -142,7 +160,7 @@
 }
 
 .nav-button:hover {
-  background-color: rgb(201, 201, 201);
+  background-color: var(--copper);
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -176,15 +194,219 @@
 }
 
 .dot:hover {
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: var(--light-orange);
   transform: scale(1.2);
 }
 
 .dot.active {
-  background-color: white;
+  background-color: var(--cream);
   transform: scale(1.2);
 }
 
+/* Sections */
+.section{
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  min-height: 400px;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+}
+.section h1{
+  position: relative;
+}
+.section h1{
+  position: absolute;
+}
+.section p{
+  display: flex;
+  margin-left: 30px;
+  font-weight: 600;
+  font-size: large;
+  word-spacing: 0.4rem;
+  padding: 100px;
+  color: var(--cream);
+  background-color: var(--oak-brown);
+  transition: all 0.5s ease-in;
+}
+
+/* Add these to your existing App.css */
+
+/* Login Page Styles */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cream);
+  padding: 1rem;
+}
+
+.login-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-header h1 {
+  color: var(--oak-brown);
+  margin-bottom: 0.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--dark-wood);
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--copper);
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: var(--burnt-orange);
+}
+
+.login-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--oak-brown);
+  color: var(--cream);
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: var(--burnt-orange);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.login-footer a {
+  color: var(--copper);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login-footer a:hover {
+  color: var(--burnt-orange);
+}
+
+/* Enhanced About Section with Vine Animation */
+.section p {
+  position: relative;
+  border: 3px solid transparent;
+  transition: all 0.5s ease-in;
+}
+
+.section p::before,
+.section p::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  border: 2px solid var(--light-orange);
+  transition: width 0.5s ease, height 0.5s ease 0.5s, opacity 0.3s;
+}
+
+.section p::before {
+  top: -10px;
+  left: -10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.section p::after {
+  bottom: -10px;
+  right: -10px;
+  border-left: none;
+  border-top: none;
+}
+
+.section p:hover::before,
+.section p:hover::after {
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+}
+
+/* Levels Section */
+.levels-section {
+  padding: 4rem 2rem;
+  background-color: var(--cream);
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.level-card {
+  background-color: var(--oak-brown);
+  padding: 2rem;
+  border-radius: 1rem;
+  color: var(--cream);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.level-card:hover {
+  transform: translateY(-10px);
+}
+
+.level-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--light-orange);
+}
+
+.level-description {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .levels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .levels-grid {
+    grid-template-columns: 1fr;
+  }
+}
 /* Responsive design */
 @media (max-width: 1024px) {
   .slider-container {

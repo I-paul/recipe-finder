@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './App.css';
+import { useContext } from 'react';
+import { AuthContext } from './main';
 
+// In your component:
+const { logout } = useContext(AuthContext);
 const App = () => {
   const images = [
     {
@@ -44,7 +48,7 @@ const App = () => {
       if (!isAnimating) {
         goToNext();
       }
-    }, 5000);
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [isAnimating]);
@@ -74,7 +78,7 @@ const App = () => {
   };
 
   return (
-    <div className="app-container">
+    <>
       <nav className="navbar">
         <div className="navbar-container">
           <div className="navbar-content">
@@ -139,7 +143,46 @@ const App = () => {
           </div>
         </div>
       </div>
+      <div className="section" id='about'>
+	  	<h1> What are we? </h1>
+        <p>
+          This is a website created for the cooking enthusiats who need challenges. <br />
+          Here you'll find any recipe you what to know to increase you cooking skill.
+        </p>
+      </div>
+      <div className="levels-section">
+    <div className="levels-grid">
+      <div className="level-card">
+        <h3 className="level-title">Beginner</h3>
+        <p className="level-description">
+          Perfect for those just starting their culinary journey. Learn basic techniques, 
+          simple recipes, and essential kitchen safety.
+        </p>
+      </div>
+      <div className="level-card">
+        <h3 className="level-title">Intermediate</h3>
+        <p className="level-description">
+          Ready to expand your skills? Discover more complex techniques, international 
+          cuisines, and flavor combinations.
+        </p>
+      </div>
+      <div className="level-card">
+        <h3 className="level-title">Advanced</h3>
+        <p className="level-description">
+          For experienced cooks looking to master sophisticated techniques, gourmet 
+          dishes, and professional presentation.
+        </p>
+      </div>
+      <div className="level-card">
+        <h3 className="level-title">Master Chef</h3>
+        <p className="level-description">
+          Challenge yourself with expert-level recipes, innovative cooking methods, 
+          and creative culinary experiments.
+        </p>
+      </div>
     </div>
+  </div>
+    </>
   );
 };
 
