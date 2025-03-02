@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from './main';
 import './App.css';
-const Login = ({ onLogin }) => {
+
+const Login = () => {
+  const { login, toggleAuthMode } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
@@ -14,51 +18,59 @@ const Login = ({ onLogin }) => {
       return;
     }
 
-    // You can add more validation here
-
-    // Call the onLogin function passed from the parent
-    onLogin({ email, password });
+    // Call the login function from AuthContext
+    login({ email, password });
   };
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <div className="login-header">
-          <h1>Recipe Finder</h1>
-          <p>Sign in to your account</p>
+    <div className="auth-form-container login-form">
+      <div className="auth-header">
+        <h2>Welcome Back</h2>
+        <p>Sign in to your Recipe Finder account</p>
+      </div>
+      <form onSubmit={handleSubmit} className="auth-form">
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required 
+            placeholder="your@email.com"
+          />
         </div>
-        <form onSubmit={handleSubmit}>
-          {error && (
-            <div className="error-message" style={{ color: 'var(--spice-red)', marginBottom: '1rem' }}>
-              {error}
-            </div>
-          )}
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input 
-              type="email" 
-              id="email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input 
-              type="password" 
-              id="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required 
-            />
-          </div>
-          <button type="submit" className="login-button">Sign In</button>
-        </form>
-        <div className="login-footer">
-          <p>Don't have an account? <a href="#signup">Sign up</a></p>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required 
+            placeholder="••••••••"
+          />
+        </div>
+        <div className="forgot-password">
           <a href="#forgot-password">Forgot password?</a>
         </div>
+        <button type="submit" className="auth-button">Sign In</button>
+      </form>
+      <div className="auth-footer">
+        <p>
+          Don't have an account?{' '}
+          <button 
+            onClick={toggleAuthMode}
+            className="auth-toggle-button"
+          >
+            Sign up
+          </button>
+        </p>
       </div>
     </div>
   );

@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ChevronLeft, ChevronRight, User, X } from 'lucide-react';
 import './App.css';
-import { useContext } from 'react';
 import { AuthContext } from './main';
+import Login from './Login';
+import Signup from './signup';
 
-// In your component:
-const { logout } = useContext(AuthContext);
 const App = () => {
+  const { 
+    isAuthenticated, 
+    logout, 
+    showAuthModal, 
+    authMode, 
+    openLogin, 
+    closeAuthModal 
+  } = useContext(AuthContext);
+
   const images = [
     {
       src: "../src/assets/slide1.jpg",
@@ -77,6 +85,22 @@ const App = () => {
     }
   };
 
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
   return (
     <>
       <nav className="navbar">
@@ -87,13 +111,38 @@ const App = () => {
             </div>
             <div className="nav-links">
               <a href="#home">Home</a>
-              <a href="#recipes">Recipes</a>
+			  <a href="#about">About</a>
               <a href="#categories">Categories</a>
-              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
+              {isAuthenticated ? (
+                <button onClick={logout} >
+                  <User size={16} />
+                  Logout
+                </button>
+              ) : (
+                <button onClick={openLogin}>
+                  <User size={16} />
+                  Login
+                </button>
+              )}
             </div>
           </div>
         </div>
       </nav>
+
+      {/* Auth Modal */}
+      {showAuthModal && (
+        <div className="modal-overlay">
+          <div className="modal-container">
+            <button className="modal-close" onClick={closeAuthModal}>
+              <X size={24} />
+            </button>
+            <div className="auth-container">
+              {authMode === 'login' ? <Login /> : <Signup />}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="slider-wrapper">
         <div className="slider-container">
@@ -144,44 +193,51 @@ const App = () => {
         </div>
       </div>
       <div className="section" id='about'>
-	  	<h1> What are we? </h1>
         <p>
-          This is a website created for the cooking enthusiats who need challenges. <br />
-          Here you'll find any recipe you what to know to increase you cooking skill.
+		Cooking made effortless! Our web app helps you discover the perfect dishes based on your preferences and the ingredients available near you. <br />
+		Take the guesswork out of meal planning by simply uploading an image of a dish to get its recipe and step-by-step instructions. <br /> <br />
+		To keep your meals fresh and exciting, the app tracks the dishes you've prepared over the past month, ensuring no repetitive suggestions. <br />
+		Plus, connect with other food enthusiasts through the comment section under each recipe—share tips, ask questions, and make cooking a collaborative experience. <br /> <br />
+		Say goodbye to mealtime dilemmas and start exploring new flavors with ease!
         </p>
       </div>
-      <div className="levels-section">
-    <div className="levels-grid">
-      <div className="level-card">
-        <h3 className="level-title">Beginner</h3>
-        <p className="level-description">
-          Perfect for those just starting their culinary journey. Learn basic techniques, 
-          simple recipes, and essential kitchen safety.
-        </p>
+      <div className="levels-section" id='categories'>
+        <div className="levels-grid">
+          <div className="level-card">
+            <h3 className="level-title">Beginner</h3>
+            <p className="level-description">
+              Perfect for those just starting their culinary journey. Learn basic techniques, 
+              simple recipes, and essential kitchen safety.
+            </p>
+          </div>
+          <div className="level-card">
+            <h3 className="level-title">Intermediate</h3>
+            <p className="level-description">
+              Ready to expand your skills? Discover more complex techniques, international 
+              cuisines, and flavor combinations.
+            </p>
+          </div>
+          <div className="level-card">
+            <h3 className="level-title">Advanced</h3>
+            <p className="level-description">
+              For experienced cooks looking to master sophisticated techniques, gourmet 
+              dishes, and professional presentation.
+            </p>
+          </div>
+          <div className="level-card">
+            <h3 className="level-title">Master Chef</h3>
+            <p className="level-description">
+              Challenge yourself with expert-level recipes, innovative cooking methods, 
+              and creative culinary experiments.
+            </p>
+          </div>
+        </div>
       </div>
-      <div className="level-card">
-        <h3 className="level-title">Intermediate</h3>
-        <p className="level-description">
-          Ready to expand your skills? Discover more complex techniques, international 
-          cuisines, and flavor combinations.
-        </p>
-      </div>
-      <div className="level-card">
-        <h3 className="level-title">Advanced</h3>
-        <p className="level-description">
-          For experienced cooks looking to master sophisticated techniques, gourmet 
-          dishes, and professional presentation.
-        </p>
-      </div>
-      <div className="level-card">
-        <h3 className="level-title">Master Chef</h3>
-        <p className="level-description">
-          Challenge yourself with expert-level recipes, innovative cooking methods, 
-          and creative culinary experiments.
-        </p>
-      </div>
-    </div>
-  </div>
+	  <div className='copyright'>
+		<footer className="bg-gray-900 text-white text-center p-4">
+		<p>&copy; {new Date().getFullYear()} Paul. All rights reserved.</p>
+    	</footer>
+	  </div>
     </>
   );
 };

@@ -8,12 +8,33 @@
   --dark-wood: #5C4033;        /* Deep brown */
   --spice-red: #C0392B;        /* Warm red accent */
 }
+html {
+  scroll-behavior: smooth;
+}
 
 body{
   min-height: 100vh;
   background-color: var(--cream);
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 248, 220, 0.5); /* Light cream background */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--copper);  /* Copper color from your theme */
+  border-radius: 10px;
+  border: 2px solid rgba(255, 248, 220, 0.7); /* Cream border */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--burnt-orange); /* Burnt orange on hover */
+}
 /* Navbar styles */
 .navbar {
   width: 100%;
@@ -64,6 +85,25 @@ body{
 
 .nav-links a:hover {
   color: var(--light-orange);
+}
+
+.navbar button {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-left: 16px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--cream);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  color: var(--spice-red);
 }
 
 /* Slider styles */
@@ -213,145 +253,56 @@ body{
   overflow: hidden;
   transition: all 0.6s ease-in-out;
 }
-.section h1{
-  position: relative;
+#about{
+	padding: 25px;
+	justify-content: center;
 }
-.section h1{
-  position: absolute;
-}
-.section p{
+#about p{
   display: flex;
   margin-left: 30px;
   font-weight: 600;
   font-size: large;
   word-spacing: 0.4rem;
-  padding: 100px;
+  padding: 50px;
   color: var(--cream);
   background-color: var(--oak-brown);
   transition: all 0.5s ease-in;
 }
 
-/* Add these to your existing App.css */
-
-/* Login Page Styles */
-.login-page {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--cream);
-  padding: 1rem;
-}
-
-.login-container {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-}
-
-.login-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.login-header h1 {
-  color: var(--oak-brown);
-  margin-bottom: 0.5rem;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--dark-wood);
-  font-weight: bold;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid var(--copper);
-  border-radius: 0.5rem;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-  border-color: var(--burnt-orange);
-}
-
-.login-button {
-  width: 100%;
-  padding: 1rem;
-  background-color: var(--oak-brown);
-  color: var(--cream);
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-button:hover {
-  background-color: var(--burnt-orange);
-}
-
-.login-footer {
-  text-align: center;
-  margin-top: 1.5rem;
-}
-
-.login-footer a {
-  color: var(--copper);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.login-footer a:hover {
-  color: var(--burnt-orange);
-}
-
-/* Enhanced About Section with Vine Animation */
-.section p {
+/* animation for about sec */
+#about p {
   position: relative;
-  border: 3px solid transparent;
+  border: 5px solid transparent;
   transition: all 0.5s ease-in;
 }
 
-.section p::before,
-.section p::after {
+#about p::before,
+#about p::after {
   content: '';
   position: absolute;
   width: 0;
   height: 0;
   opacity: 0;
-  border: 2px solid var(--light-orange);
+  border: 3px solid var(--light-orange);
   transition: width 0.5s ease, height 0.5s ease 0.5s, opacity 0.3s;
 }
 
-.section p::before {
-  top: -10px;
-  left: -10px;
+#about p::before {
+  top: -15px;
+  left: -15px;
   border-right: none;
   border-bottom: none;
 }
 
-.section p::after {
-  bottom: -10px;
-  right: -10px;
+#about p::after {
+  bottom: -15px;
+  right: -15px;
   border-left: none;
   border-top: none;
 }
 
-.section p:hover::before,
-.section p:hover::after {
+#about p:hover::before,
+#about p:hover::after {
   width: 30px;
   height: 30px;
   opacity: 1;
@@ -360,7 +311,11 @@ body{
 /* Levels Section */
 .levels-section {
   padding: 4rem 2rem;
+  display: flex;
+  min-height: 500px;
   background-color: var(--cream);
+  justify-content: center;
+  align-items: center;
 }
 
 .levels-grid {
@@ -465,4 +420,212 @@ body{
   .nav-button {
     padding: 0.75rem;
   }
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(92, 64, 51, 0.7); /* Dark wood with transparency */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-container {
+  background-color: var(--cream);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(139, 69, 19, 0.3);
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.4s ease;
+  border: 2px solid var(--copper);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark-wood);
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  z-index: 10;
+}
+
+.modal-close:hover {
+  background-color: rgba(139, 69, 19, 0.1);
+  color: var(--burnt-orange);
+}
+
+/* Auth Container */
+.auth-container {
+  position: relative;
+  overflow: hidden;
+  min-height: 460px;
+}
+
+/* Auth Forms */
+.auth-form-container {
+  padding: 24px;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.login-form {
+  animation: slideInRight 0.5s forwards;
+}
+
+.signup-form {
+  animation: slideInLeft 0.5s forwards;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.auth-header h2 {
+  font-size: 1.8rem;
+  color: var(--oak-brown);
+  margin-bottom: 8px;
+}
+
+.auth-header p {
+  color: var(--copper);
+  font-size: 0.9rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--dark-wood);
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border: 1px solid var(--copper);
+  border-radius: 8px;
+  max-width: 425px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  background-color: rgba(255, 248, 220, 0.8);
+  color: var(--dark-wood);
+}
+
+.form-group input:focus {
+  border-color: var(--burnt-orange);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(211, 84, 0, 0.2);
+}
+
+.error-message {
+  background-color: rgba(192, 57, 43, 0.1);
+  color: var(--spice-red);
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 4px solid var(--spice-red);
+  font-size: 0.9rem;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: -8px;
+}
+
+.forgot-password a {
+  color: var(--copper);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.forgot-password a:hover {
+  color: var(--burnt-orange);
+  text-decoration: underline;
+}
+
+.auth-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  gap: 8px;
+  background-color: var(--burnt-orange);
+  color: var(--cream);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.auth-button:active {
+  transform: scale(0.98);
+}
+
+.auth-footer {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--dark-wood);
+  font-size: 0.9rem;
+}
+
+.auth-toggle-button {
+  background: none;
+  border: none;
+  color: var(--burnt-orange);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.auth-toggle-button:hover {
+  color: var(--spice-red);
+  text-decoration: underline;
 }
