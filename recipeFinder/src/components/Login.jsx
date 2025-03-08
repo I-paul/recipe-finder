@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from './main';
-import './App.css';
+import { AuthContext } from '../main';
+import './styling/App.css';
 
 const Login = () => {
   const { login, toggleAuthMode } = useContext(AuthContext);

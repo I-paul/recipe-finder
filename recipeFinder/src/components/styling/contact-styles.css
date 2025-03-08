@@ -1,0 +1,219 @@
+.contact-section {
+    background: linear-gradient(
+      135deg, 
+      rgba(211, 84, 0, 0.05), 
+      rgba(139, 69, 19, 0.05)
+    );
+    padding: 4rem 2rem;
+    color: var(--dark-wood);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .contact-title {
+    text-align: center;
+    color: var(--oak-brown);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    animation: titleWiggle 3s infinite alternate;
+  }
+  
+  @keyframes titleWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+  }
+  
+  .team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .team-member-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 
+      0 10px 25px rgba(139, 69, 19, 0.1),
+      inset 0 0 0 2px transparent;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    width: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .team-member-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      var(--light-orange) 0deg, 
+      var(--burnt-orange) 90deg, 
+      var(--copper) 180deg, 
+      var(--spice-red) 270deg, 
+      var(--light-orange) 360deg
+    );
+    animation: rotate 5s linear infinite;
+    z-index: -1;
+  }
+  
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .team-member-card::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: rgba(255, 248, 220, 0.9);
+    border-radius: 17px;
+    z-index: -1;
+  }
+  
+  .team-member-card:hover {
+    transform: scale(1.05);
+    box-shadow: 
+      0 15px 35px rgba(139, 69, 19, 0.2),
+      inset 0 0 0 2px var(--burnt-orange);
+  }
+  
+  .member-avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  
+  .avatar-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--copper);
+    position: relative;
+    /* animation: float 3s ease-in-out infinite alternate; */
+  }
+  
+  /* @keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-15px); }
+  } */
+  
+  .member-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .member-social-links a {
+    color: var(--dark-wood);
+    transition: all 0.3s ease;
+    transform: scale(1);
+  }
+  
+  .member-social-links a:hover {
+    color: var(--burnt-orange);
+    transform: scale(1.3) rotate(360deg);
+  }
+  
+  .contact-info {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 
+      0 10px 25px rgba(139, 69, 19, 0.1),
+      inset 0 0 0 2px transparent;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .contact-info::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      var(--light-orange) 0deg, 
+      var(--burnt-orange) 90deg, 
+      var(--copper) 180deg, 
+      var(--spice-red) 270deg, 
+      var(--light-orange) 360deg
+    );
+    animation: rotate 5s linear infinite;
+    z-index: -1;
+  }
+  
+  .contact-info::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: rgba(255, 248, 220, 0.9);
+    border-radius: 17px;
+    z-index: -1;
+  }
+  
+  .contact-methods {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--dark-wood);
+    transition: transform 0.3s ease;
+  }
+  
+  .contact-method:hover {
+    transform: translateY(-10px);
+  }
+  
+  .contact-icon {
+    color: var(--burnt-orange);
+    transition: all 0.3s ease;
+  }
+  
+  .contact-method:hover .contact-icon {
+    transform: rotate(360deg) scale(1.2);
+  }
+  
+  @media (max-width: 768px) {
+    .team-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .contact-methods {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .contact-method {
+      margin-bottom: 1rem;
+    }
+  }

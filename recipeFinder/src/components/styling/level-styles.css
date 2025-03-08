@@ -1,0 +1,215 @@
+/* Levels Section */
+.levels-section{
+    padding: 4rem 2rem;
+    display: flex;
+    min-height: 500px;
+    background-color: var(--cream);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .levels-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  
+  .level-card {
+    background-color: var(--oak-brown);
+    padding: 2rem;
+    border-radius: 1rem;
+    color: var(--cream);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .level-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .level-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--light-orange);
+  }
+  
+  .level-description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 1024px) {
+    .levels-grid {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  }
+  
+  @media (max-width: 640px) {
+    .levels-grid {
+      grid-template-columns: 1fr;
+  }
+  }
+
+/* Main layout and container styling */
+.difficulties {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--cream);
+  border-radius: 8px;
+}
+
+.difficulties h1 {
+  color: var(--oak-brown);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid var(--copper);
+  padding-bottom: 0.5rem;
+}
+
+.difficulties p {
+  color: var(--dark-wood);
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Food category containers */
+.category-container {
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.category-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+.category-header {
+  background-color: var(--oak-brown);
+  color: var(--light-orange);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.category-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.category-header .icon {
+  transition: transform 0.3s;
+}
+
+.category-header .icon.open {
+  transform: rotate(180deg);
+}
+
+/* Recipe listings inside dropdown */
+.recipe-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+}
+
+.recipe-dropdown.open {
+  max-height: 500px;
+}
+
+.recipe-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.recipe-item {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.recipe-item:last-child {
+  border-bottom: none;
+}
+
+.recipe-icon {
+  color: var(--light-orange);
+  margin-right: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.recipe-name {
+  color: var(--dark-wood);
+  font-weight: 500;
+}
+
+.recipe-time {
+  margin-left: auto;
+  color: var(--spice-red);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.recipe-time svg {
+  margin-right: 0.3rem;
+}
+
+/* Button styling
+.view-all-button {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--oak-brown);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-all-button:hover {
+  background-color: var(--copper);
+} */
+
+/* Empty state styling */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--dark-wood);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .category-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .difficulties {
+    padding: 1.5rem;
+  }
+  
+  .difficulties h1 {
+    font-size: 2rem;
+  }
+}

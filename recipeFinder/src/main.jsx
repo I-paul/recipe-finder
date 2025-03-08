@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
-import Login from './Login.jsx';
-import Signup from './signup.jsx';
+import Login from './components/Login.jsx';
+import Signup from './components/Signup.jsx';
+import Difficulty from './components/level-difficulty.jsx';
 
 // Create auth context
 export const AuthContext = createContext();
@@ -76,6 +77,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
+          <Route path="/level-difficulty/:difficulty" element={<Difficulty />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<Navigate to="/" />} />
